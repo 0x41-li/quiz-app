@@ -9,10 +9,6 @@ import BottomBlob from "../assets/images/bottom-blob.svg";
 
 const PrimarySection = styled.section`
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   background: url("${TopBlob}") no-repeat top right,
     url("${BottomBlob}") no-repeat bottom left;
   background-color: #f5f7fb;
