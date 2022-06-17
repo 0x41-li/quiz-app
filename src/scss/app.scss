@@ -1,0 +1,44 @@
+// |\ General
+*,
+*::after,
+*::before,
+html,
+body {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+// || Specific
+
+// || Utilities
+// - font families
+.font-inter {
+  font-family: "inter", Arial, Helvetica, sans-serif;
+}
+
+.font-karla {
+  font-family: "Karla", Arial, Helvetica, sans-serif;
+}
+
+// - font weights
+.fw-regular {
+  font-weight: 400;
+}
+
+.fw-medium {
+  font-weight: 500;
+}
+
+.fw-semi-bold {
+  font-weight: 600;
+}
+
+.fw-bold {
+  font-weight: 700;
+}
+
+// colors
+.text-primary {
+  color: #293264;
+}

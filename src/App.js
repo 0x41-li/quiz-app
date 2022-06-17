@@ -1,25 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
 
-function App() {
+// pages
+import GetStarted from "./pages/GetStarted";
+import Quiz from "./pages/Quiz";
+import Result from "./pages/Result";
+
+// scss
+import "./scss/app.scss";
+
+const App = () => {
+  const [page, setPage] = useState("get-started");
+
+  let currentPageComp = <GetStarted />;
+
+  switch (page) {
+    case "get-started":
+      currentPageComp = <GetStarted setPage={setPage} />;
+      break;
+    case "quiz":
+      currentPageComp = <Quiz />;
+      break;
+    case "result":
+      currentPageComp = <Result />;
+      break;
+
+    default:
+      break;
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+  <main>
+    {currentPageComp}
+  </main>
   );
-}
+};
 
 export default App;
