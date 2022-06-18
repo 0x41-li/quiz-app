@@ -47,7 +47,7 @@ const ResultPara = styled.p`
   line-height: 15px;
 `;
 
-const Quiz = (props) => {
+const Quiz = () => {
   // questions state structure
   /*
   [
@@ -74,8 +74,12 @@ const Quiz = (props) => {
     correctAnswersNum: null,
   });
 
-  // get questions from the API
   useEffect(() => {
+    getQuestions();
+  }, []);
+
+  // get questions from the API
+  function getQuestions() {
     const resp = fetch("https://opentdb.com/api.php?amount=5");
 
     resp
@@ -107,10 +111,12 @@ const Quiz = (props) => {
 
         // update state
         setQuestions(questionsState);
+      })
+      .catch((error) => {
+        console.log(error);
+        getQuestions();
       });
-
-    //
-  }, []);
+  }
 
   // clicking/selecting an answer handler
   function answerClickHandler(question, index) {
@@ -137,15 +143,20 @@ const Quiz = (props) => {
   function checkAnswersAndDisplayResults() {
     let correctAnswersNum = 0;
 
-    questions.map((q) => {
-      q.answers.map((answer) => {
-        if (answer.selected && answer.value === q.correctAnswer) {
-          correctAnswersNum++;
-        }
+    if (result.show) {
+      setResult({ show: false, correctAnswersNum: 0 });
+      setQuestions([]);
+      getQuestions();
+    } else {
+      questions.map((q) => {
+        q.answers.map((answer) => {
+          if (answer.selected && answer.value === q.correctAnswer) {
+            correctAnswersNum++;
+          }
+        });
       });
-    });
-
-    setResult({ show: true, correctAnswersNum: correctAnswersNum });
+      setResult({ show: true, correctAnswersNum: correctAnswersNum });
+    }
   }
 
   const questionsComps = questions.map((question, index) => {
