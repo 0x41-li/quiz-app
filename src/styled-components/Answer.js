@@ -20,6 +20,10 @@ const Answer = styled.button`
         } else {
           return "#F8BCBC";
         }
+      } else {
+        if (props.correctAnswer) {
+          return "#F8BCBC";
+        }
       }
     } else {
       if (props.selected) {

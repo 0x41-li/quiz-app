@@ -113,7 +113,6 @@ const Quiz = () => {
         setQuestions(questionsState);
       })
       .catch((error) => {
-        console.log(error);
         getQuestions();
       });
   }
