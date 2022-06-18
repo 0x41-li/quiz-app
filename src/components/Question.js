@@ -13,7 +13,17 @@ const Question = (props) => {
         key={index}
         dangerouslySetInnerHTML={{ __html: answer.value }}
         selected={answer.selected}
-        onClick={() => props.answerClickHandler(props.question.value, index)}
+        onClick={
+          !props.showResult
+            ? () => props.answerClickHandler(props.question.value, index)
+            : () => {
+                return;
+              }
+        }
+        showResult={props.showResult}
+        correctAnswer={
+          props.question.correctAnswer === answer.value ? true : false
+        }
       ></Answer>
     );
   });

@@ -26,12 +26,25 @@ const Button = styled(PrimaryButton)`
 
   margin: 0 auto;
 
-  margin-top: 5px;
-
   font-size: 10.24px;
   line-height: 12px;
 
   color: #f5f7fb;
+`;
+
+const ResultAndButtonWrapper = styled.div`
+  margin-top: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 399px;
+  margin: 0 auto;
+  gap: 19px;
+`;
+
+const ResultPara = styled.p`
+  font-size: 12.8px;
+  line-height: 15px;
 `;
 
 const Quiz = (props) => {
@@ -56,6 +69,10 @@ const Quiz = (props) => {
   ]
   */
   const [questions, setQuestions] = useState([]);
+  const [result, setResult] = useState({
+    show: false,
+    correctAnswersNum: null,
+  });
 
   // get questions from the API
   useEffect(() => {
@@ -110,9 +127,25 @@ const Quiz = (props) => {
             }),
           };
         }
+
         return q;
       });
     });
+  }
+
+  // check answers and display results
+  function checkAnswersAndDisplayResults() {
+    let correctAnswersNum = 0;
+
+    questions.map((q) => {
+      q.answers.map((answer) => {
+        if (answer.selected && answer.value === q.correctAnswer) {
+          correctAnswersNum++;
+        }
+      });
+    });
+
+    setResult({ show: true, correctAnswersNum: correctAnswersNum });
   }
 
   const questionsComps = questions.map((question, index) => {
@@ -121,14 +154,37 @@ const Quiz = (props) => {
         key={index}
         question={question}
         answerClickHandler={answerClickHandler}
+        showResult={result.show}
       />
     );
   });
 
   return (
     <Section>
-      {questionsComps}
-      <Button className="font-inter fw-semi-bold">Check answers</Button>
+      {questions.length === 0 ? (
+        <p className="text-primary font-inter fw-bold text-center">
+          Loading...
+        </p>
+      ) : (
+        <>
+          {questionsComps}
+          <ResultAndButtonWrapper>
+            {result.show ? (
+              <ResultPara className="text-primary font-inter fw-bold">
+                You scored {result.correctAnswersNum}/5 correct answers
+              </ResultPara>
+            ) : (
+              ""
+            )}
+            <Button
+              className="font-inter fw-semi-bold"
+              onClick={checkAnswersAndDisplayResults}
+            >
+              {result.show ? "Play again" : "Check answers"}
+            </Button>
+          </ResultAndButtonWrapper>
+        </>
+      )}
     </Section>
   );
 };

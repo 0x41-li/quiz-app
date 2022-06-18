@@ -12,8 +12,25 @@ const Answer = styled.button`
 
   cursor: pointer;
 
-  background: ${(props) => (props.selected ? "#D6DBF5" : "transparent")};
-  border: ${(props) => (!props.selected ? "0.794239px solid #4d5b9e" : "unset")};
+  background: ${(props) => {
+    if (props.showResult) {
+      if (props.selected) {
+        if (props.correctAnswer) {
+          return "#94D7A2";
+        } else {
+          return "#F8BCBC";
+        }
+      }
+    } else {
+      if (props.selected) {
+        return "#D6DBF5";
+      } else {
+        return "transparent";
+      }
+    }
+  }};
+  border: ${(props) =>
+    !props.selected ? "0.794239px solid #4d5b9e" : "unset"};
 `;
 
 export default Answer;
