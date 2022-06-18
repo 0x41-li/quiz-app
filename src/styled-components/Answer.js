@@ -22,7 +22,7 @@ const Answer = styled.button`
         }
       } else {
         if (props.correctAnswer) {
-          return "#F8BCBC";
+          return "#94D7A2";
         }
       }
     } else {
@@ -33,8 +33,17 @@ const Answer = styled.button`
       }
     }
   }};
-  border: ${(props) =>
-    !props.selected ? "0.794239px solid #4d5b9e" : "unset"};
+  border: ${(props) => {
+    if (props.selected) {
+      return "unset";
+    } else {
+      if (props.showResult && props.correctAnswer) {
+        return "unset";
+      } else {
+        return "0.794239px solid #4d5b9e";
+      }
+    }
+  }};
 `;
 
 export default Answer;

@@ -16,4 +16,4 @@ This the last project from the Scrimba react free course, it was really fun, and
 
 # Live Preview
 
-Live Site: []()
+Live Site: [https://0x41-li.github.io/quiz-app/](https://0x41-li.github.io/quiz-app/)
